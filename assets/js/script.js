@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     }
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    } )
+
     runGame("addition");
 
 })
@@ -24,6 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
  * and after the user's answer has been processed
  */
 function runGame(gameType) {
+
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
 
     // Creat two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() *25) +1;
@@ -39,7 +48,7 @@ function runGame(gameType) {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
     }
-    runGame(calculatedAnswer[1]);
+    
 }
 
 /**
@@ -49,7 +58,7 @@ function runGame(gameType) {
 function checkAnswer() {
 
     let userAnswer = parseInt(document.getElementById("answer-box").value);
-    let = calculatedAnswer = calculateCorrectAnswer();
+    let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if(isCorrect) {
@@ -60,7 +69,8 @@ function checkAnswer() {
         incrementWrongAnswer();
     }
 
-}
+    runGame(calculatedAnswer[1]);
+}   
 
 
 /**
